@@ -1,0 +1,9 @@
+/pgdata/
+/.venv/
+/.idea/vcs.xml
+/app.log.2025-11-10
+/.idea
+.idea
+/.idea/*
+/.env
+/pdfs/processed/10th-science-chap-1.pdf
