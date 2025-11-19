@@ -10,14 +10,14 @@ from app.models import Student
 
 async def get_student(session: AsyncSession, student_id: int) -> Optional[Student]:
     """Get student by ID"""
-    result = await session.exec(select(Student).where(Student.id == student_id))
-    return result.first()
+    result = await session.execute(select(Student).where(Student.id == student_id))
+    return result.scalar_one_or_none()
 
 
 async def get_student_by_user_id(session: AsyncSession, user_id: int) -> Optional[Student]:
     """Get student by user ID"""
-    result = await session.exec(select(Student).where(Student.user_id == user_id))
-    return result.first()
+    result = await session.execute(select(Student).where(Student.user_id == user_id))
+    return result.scalar_one_or_none()
 
 
 async def create_student(session: AsyncSession, student_data: dict) -> Student:

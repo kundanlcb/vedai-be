@@ -10,8 +10,8 @@ from app.models import ProgressEntry
 
 async def get_progress(session: AsyncSession, progress_id: int) -> Optional[ProgressEntry]:
     """Get progress entry by ID"""
-    result = await session.exec(select(ProgressEntry).where(ProgressEntry.id == progress_id))
-    return result.first()
+    result = await session.execute(select(ProgressEntry).where(ProgressEntry.id == progress_id))
+    return result.scalar_one_or_none()
 
 
 async def get_student_progress(
@@ -28,8 +28,8 @@ async def get_student_progress(
     if chapter:
         query = query.where(ProgressEntry.chapter == chapter)
     
-    result = await session.exec(query)
-    return list(result.all())
+    result = await session.execute(query)
+    return list(result.scalars().all())
 
 
 async def get_or_create_progress(
@@ -45,8 +45,8 @@ async def get_or_create_progress(
         ProgressEntry.subject == subject,
         ProgressEntry.chapter == chapter,
     )
-    result = await session.exec(query)
-    progress = result.first()
+    result = await session.execute(query)
+    progress = result.scalar_one_or_none()
     
     if progress:
         return progress

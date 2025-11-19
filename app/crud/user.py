@@ -10,13 +10,13 @@ from app.crud.base import hash_password, verify_password
 
 async def get_user_by_email(session: AsyncSession, email: str) -> Optional[User]:
     q = select(User).where(User.email == email)
-    res = await session.exec(q)
-    return res.first()
+    res = await session.execute(q)
+    return res.scalar_one_or_none()
 
 async def get_user(session: AsyncSession, user_id: int) -> Optional[User]:
     q = select(User).where(User.id == user_id)
-    res = await session.exec(q)
-    return res.first()
+    res = await session.execute(q)
+    return res.scalar_one_or_none()
 
 async def create_user(session: AsyncSession, email: str, password: str, is_superuser: bool = False) -> User:
     user = User(

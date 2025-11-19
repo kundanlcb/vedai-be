@@ -74,12 +74,19 @@ async def init_db() -> None:
     # Ensure all model modules are imported before calling this so metadata is complete.
     # e.g. in app/main.py: `import app.models  # noqa: F401`
     async with engine.begin() as conn:
-        # ensure pgvector extension exists in this database
-        await conn.run_sync(lambda sync_conn: sync_conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;")))
+        # ensure pgvector extension exists in this database (PostgreSQL only)
+        if DATABASE_URL.startswith("postgresql"):
+            try:
+                await conn.run_sync(lambda sync_conn: sync_conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;")))
+            except Exception as e:
+                print(f"Warning: Could not create pgvector extension: {e}")
+        
         # then create tables
         await conn.run_sync(SQLModel.metadata.create_all)
-        # run migrations
-        await _run_schema_migrations(conn)
+        
+        # run migrations (PostgreSQL only)
+        if DATABASE_URL.startswith("postgresql"):
+            await _run_schema_migrations(conn)
 
 
 async def _run_schema_migrations(conn) -> None:

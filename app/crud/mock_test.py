@@ -11,8 +11,8 @@ from app.crud.question import get_question
 
 async def get_test(session: AsyncSession, test_id: int) -> Optional[MockTest]:
     """Get mock test by ID"""
-    result = await session.exec(select(MockTest).where(MockTest.id == test_id))
-    return result.first()
+    result = await session.execute(select(MockTest).where(MockTest.id == test_id))
+    return result.scalar_one_or_none()
 
 
 async def list_tests(
@@ -32,8 +32,8 @@ async def list_tests(
         query = query.where(MockTest.class_name == class_name)
     
     query = query.offset(offset).limit(limit)
-    result = await session.exec(query)
-    return list(result.all())
+    result = await session.execute(query)
+    return list(result.scalars().all())
 
 
 async def create_test(session: AsyncSession, test_data: dict) -> MockTest:
@@ -64,8 +64,8 @@ async def update_test(session: AsyncSession, test_id: int, update_data: dict) ->
 
 async def get_attempt(session: AsyncSession, attempt_id: int) -> Optional[MockTestAttempt]:
     """Get test attempt by ID"""
-    result = await session.exec(select(MockTestAttempt).where(MockTestAttempt.id == attempt_id))
-    return result.first()
+    result = await session.execute(select(MockTestAttempt).where(MockTestAttempt.id == attempt_id))
+    return result.scalar_one_or_none()
 
 
 async def start_attempt(session: AsyncSession, test_id: int, student_id: int) -> MockTestAttempt:
@@ -172,8 +172,8 @@ async def get_student_attempts(
         MockTestAttempt.student_id == student_id
     ).order_by(MockTestAttempt.created_at.desc()).offset(offset).limit(limit)
     
-    result = await session.exec(query)
-    return list(result.all())
+    result = await session.execute(query)
+    return list(result.scalars().all())
 
 
 async def get_student_stats(session: AsyncSession, student_id: int) -> dict:
