@@ -54,7 +54,7 @@ async def create_question_with_options(
 
     # Re-query question with options using selectinload to ensure relationship populated
     stmt = select(Question).where(Question.id == q.id).options(selectinload(Question.options))
-    result = await session.exec(stmt)
+    result = await session.execute(stmt)
     created_question: Optional[Question] = result.scalar_one_or_none()
     if created_question is None:
         # This should not happen; raise or return q (but raising better surfaces issues)
@@ -69,7 +69,7 @@ async def get_question(session: AsyncSession, question_id: int) -> Optional[Ques
     Returns None if not found.
     """
     stmt = select(Question).where(Question.id == question_id).options(selectinload(Question.options))
-    res = await session.exec(stmt)
+    res = await session.execute(stmt)
     return res.scalar_one_or_none()
 
 
@@ -91,5 +91,5 @@ async def list_questions(
         stmt = stmt.where(Question.chapter == chapter)
 
     stmt = stmt.options(selectinload(Question.options))
-    res = await session.exec(stmt)
-    return res.scalars().all()
+    res = await session.execute(stmt)
+    return list(res.scalars().all())

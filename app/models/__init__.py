@@ -5,6 +5,9 @@
 from .user import User
 from .content import ContentChunk
 from .question import Question, QuestionOption, QuestionType
+from .student import Student
+from .progress import ProgressEntry
+from .mock_test import MockTest, MockTestAttempt, AttemptStatus
 
 __all__ = [
     "User",
@@ -12,4 +15,9 @@ __all__ = [
     "Question",
     "QuestionOption",
     "QuestionType",
+    "Student",
+    "ProgressEntry",
+    "MockTest",
+    "MockTestAttempt",
+    "AttemptStatus",
 ]
