@@ -118,9 +118,53 @@ The API will be available at `http://localhost:8000`
 
 ## API Documentation
 
-### Interactive Documentation
-- **Swagger UI:** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
+### Interactive Documentation (Swagger/OpenAPI)
+
+The VedAI Backend API includes comprehensive, auto-generated interactive documentation powered by **Swagger UI** and **ReDoc**.
+
+#### Swagger UI
+Access the interactive API documentation at: **http://localhost:8000/docs**
+
+**Features:**
+- 🔍 **Browse all endpoints** organized by tags (Authentication, Students, Content, etc.)
+- 📝 **Try API calls directly** from the browser with the "Try it out" feature
+- 🔐 **JWT Authentication** - Use the "Authorize" button to add your Bearer token
+- 📋 **Request/Response examples** for all endpoints
+- ✅ **Auto-validation** of request parameters and body
+- 📊 **Response models** with complete schema documentation
+- 🔖 **Deep linking** - Share links to specific endpoints
+- ⏱️ **Request duration** tracking for performance monitoring
+
+#### ReDoc
+Access the alternative documentation at: **http://localhost:8000/redoc**
+
+**Features:**
+- 📚 **Clean, readable** documentation layout
+- 🔎 **Search functionality** across all endpoints
+- 📖 **Three-panel layout** for easy navigation
+- 📥 **Download OpenAPI schema** as JSON
+
+#### OpenAPI Specification
+Download the raw OpenAPI 3.1.0 specification: **http://localhost:8000/openapi.json**
+
+This can be imported into tools like:
+- Postman
+- Insomnia
+- API testing frameworks
+- Code generators
+
+### API Endpoints Overview
+
+The API is organized into 8 main categories:
+
+1. **Authentication** (`/api/auth/*`) - User login and registration
+2. **Students** (`/api/students/*`) - Student profile management
+3. **Content** (`/api/content/*`) - PDF upload and content management
+4. **Questions** (`/api/questions/*`) - Question bank operations
+5. **Ingest** (`/api/ingest/*`) - PDF ingestion and processing
+6. **Chat** (`/api/chat/*`) - AI-powered Q&A with RAG
+7. **Progress** (`/api/progress/*`) - Student progress tracking
+8. **Tests** (`/api/tests/*`) - Mock test creation and attempts
 
 ### Full API Documentation
 See [docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md) for comprehensive endpoint documentation.
