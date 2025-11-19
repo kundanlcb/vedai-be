@@ -22,6 +22,8 @@ sqlmodel = "*"
 passlib = "*"
 pdfplumber = "*"
 pydantic = {extras = ["email"], version = "*"}
+python-jose = {extras = ["cryptography"], version = "*"}
+bcrypt = "*"
 greenlet = "*"
 asyncpg = "*"
 apscheduler = "*"

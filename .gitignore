@@ -7,3 +7,13 @@
 /.idea/*
 /.env
 /pdfs/processed/10th-science-chap-1.pdf
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+uploads/
+pdfs/
+*.log
+local_dev.db
+.vscode/
